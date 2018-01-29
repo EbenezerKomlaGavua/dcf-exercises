@@ -22,4 +22,4 @@ This project provides the following exercises and even offers some simplistic so
   * Example solution: no example provided as the test case itself uses a simplistic pricing technique in [BuiltInCloudProvider](https://github.com/kecskemeti/dcf-exercises/blob/master/src/main/java/hu/unimiskolc/iit/distsys/BuiltInCloudProvider.java)
 
 ### Remark
-The solutions above are kept to be as simplistic as possible in order to allow easy understanding of the mechanics in place. As a result, some of the solutions do not offer 100% success rate in the test runs.
+The solutions above are kept to be as simplistic as possible in order to allow easy understanding of the mechanics in place. As a result, some of the solutions do not offer 100% success rate in the test runs...

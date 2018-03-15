@@ -68,27 +68,29 @@ public class FaultInjector extends Timed {
 					@Override
 					public void deregistrationPrepared(PMDeregPreparator forPM) {
 						try {
-							// drops the old machine
-							iaas.deregisterHost(forPM.pm);
+							if (iaas.machines.contains(forPM.pm)) {
+								// drops the old machine
+								iaas.deregisterHost(forPM.pm);
 
-							if (readd) {
-								// adds a new host so we are not short of
-								// hosts
-								PhysicalMachine newPM = null;
-								do {
-									if (newPM != null) {
-										ExercisesBase.dropPM(newPM);
-									}
-									newPM = ExercisesBase.getNewPhysicalMachine();
-									// let's throw away those replacements
-									// that are
-									// having too little CPU counts for our
-									// purposes
-								} while (newPM.getCapacities().getRequiredCPUs() < forPM.pm.getCapacities()
-										.getRequiredCPUs());
-								iaas.registerHost(newPM);
+								if (readd) {
+									// adds a new host so we are not short of
+									// hosts
+									PhysicalMachine newPM = null;
+									do {
+										if (newPM != null) {
+											ExercisesBase.dropPM(newPM);
+										}
+										newPM = ExercisesBase.getNewPhysicalMachine();
+										// let's throw away those replacements
+										// that are
+										// having too little CPU counts for our
+										// purposes
+									} while (newPM.getCapacities().getRequiredCPUs() < forPM.pm.getCapacities()
+											.getRequiredCPUs());
+									iaas.registerHost(newPM);
+								}
+								myHandlers.remove(forPM);
 							}
-							myHandlers.remove(forPM);
 						} catch (Exception e) {
 							throw new RuntimeException(e);
 						}

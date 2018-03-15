@@ -159,14 +159,7 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 			Timed.resetTimed();
 			ExercisesBase.reset();
 			long startTime = System.currentTimeMillis();
-			PrintStream errOut = System.err;
-			System.setErr(new PrintStream(new OutputStream() {
-				@Override
-				public void write(int arg0) throws IOException {
-					// Ignore the standard output of
-					// multiclouduser
-				}
-			}));
+
 
 			// Prepares two providers with the same VM/PM schedulers
 			IaaSService ourService, theCompetition;
@@ -190,12 +183,22 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 				new DeferredEvent(baseDelay) {
 					@Override
 					protected void eventAction() {
+						PrintStream errOut = System.err;
+						System.setErr(new PrintStream(new OutputStream() {
+							@Override
+							public void write(int arg0) throws IOException {
+								// Ignore the standard output of
+								// multiclouduser
+							}
+						}));
 						try {
 							Collections.shuffle(iaasList);
 							new MultiCloudUser(iaasList.toArray(new IaaSService[2]), SingleMatch.this);
+							
 						} catch (Exception e) {
 							throw new RuntimeException(e);
 						}
+						System.setErr(errOut);
 					}
 				};
 				baseDelay += RandomUtils.nextLong(Constants.anHour, Constants.machineLifeTime / 10);
@@ -206,7 +209,6 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 			while (!FaultInjector.simulationisComplete) {
 				Timed.simulateUntil(Timed.getFireCount() + 24 * 60 * 60 * 1000);
 			}
-			System.setErr(errOut);
 			matchRan = true;
 			System.out.println("Duration of match was: " + (System.currentTimeMillis() - startTime) + "ms");
 		}

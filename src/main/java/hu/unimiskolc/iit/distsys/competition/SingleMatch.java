@@ -194,11 +194,11 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 						try {
 							Collections.shuffle(iaasList);
 							new MultiCloudUser(iaasList.toArray(new IaaSService[2]), SingleMatch.this);
-							
+							System.setErr(errOut);
 						} catch (Exception e) {
+							System.setErr(errOut);
 							throw new RuntimeException(e);
 						}
-						System.setErr(errOut);
 					}
 				};
 				baseDelay += RandomUtils.nextLong(Constants.anHour, Constants.machineLifeTime / 10);

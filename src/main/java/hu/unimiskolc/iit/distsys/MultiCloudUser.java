@@ -22,6 +22,9 @@
  */
 package hu.unimiskolc.iit.distsys;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -126,6 +129,14 @@ public class MultiCloudUser extends Timed {
 		for (int i = 0; i < records.length; i++) {
 			records[i] = new ProviderRecord(theProviders[i]);
 		}
+		PrintStream errOut = System.err;
+		System.setErr(new PrintStream(new OutputStream() {
+			@Override
+			public void write(int arg0) throws IOException {
+				// Ignore the standard output of
+				// multiclouduser
+			}
+		}));
 
 		// Preparing the jobs for the VMs
 		RepetitiveRandomTraceGenerator rrtg = new RepetitiveRandomTraceGenerator(ComplexDCFJob.class);
@@ -142,6 +153,7 @@ public class MultiCloudUser extends Timed {
 		rrtg.setMaxNodeprocs(ExercisesBase.maxCoreCount);
 		rrtg.setParallel(rrtg.getJobNum());
 		jobs = rrtg.getAllJobs();
+		System.setErr(errOut);
 		Collections.sort(jobs, JobListAnalyser.startTimeComparator);
 		long adjustTime = 1 + Timed.getFireCount() / 1000;
 		for (Job j : jobs) {

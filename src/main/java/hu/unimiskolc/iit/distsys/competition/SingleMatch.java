@@ -184,20 +184,10 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 				new DeferredEvent(baseDelay) {
 					@Override
 					protected void eventAction() {
-						PrintStream errOut = System.err;
-						System.setErr(new PrintStream(new OutputStream() {
-							@Override
-							public void write(int arg0) throws IOException {
-								// Ignore the standard output of
-								// multiclouduser
-							}
-						}));
 						try {
 							Collections.shuffle(iaasList);
 							new MultiCloudUser(iaasList.toArray(new IaaSService[2]), SingleMatch.this);
-							System.setErr(errOut);
 						} catch (Exception e) {
-							System.setErr(errOut);
 							throw new RuntimeException(e);
 						}
 					}

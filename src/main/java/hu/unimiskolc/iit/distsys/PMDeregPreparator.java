@@ -53,8 +53,8 @@ public class PMDeregPreparator implements VirtualMachine.StateChange {
 	}
 
 	/**
-	 * Analyzes the PM and terminates all VMs that are running on it. It also
-	 * kills the PM. It does a deregistration on the PM afterwards.
+	 * Analyzes the PM and terminates all VMs that are running on it. It also kills
+	 * the PM. It does a deregistration on the PM afterwards.
 	 * 
 	 * @throws VMManagementException
 	 * @throws SecurityException
@@ -82,8 +82,10 @@ public class PMDeregPreparator implements VirtualMachine.StateChange {
 		} while (noSubscription && pm.isHostingVMs());
 		if (noSubscription) {
 			clearAllocations();
-			callbackPending = false;
-			callback.deregistrationPrepared(this);
+			if (callbackPending) {
+				callbackPending = false;
+				callback.deregistrationPrepared(this);
+			}
 		} else {
 			addnewAllocation();
 		}
@@ -99,13 +101,10 @@ public class PMDeregPreparator implements VirtualMachine.StateChange {
 			new DeferredEvent(PhysicalMachine.migrationAllocLen - 1) {
 				@Override
 				protected void eventAction() {
-					if (callbackPending) {
-						clearAllocations();
-						try {
-							addnewAllocation();
-						} catch (Exception e) {
-							throw new RuntimeException(e);
-						}
+					try {
+						updateVMSet();
+					} catch (Exception e) {
+						throw new RuntimeException(e);
 					}
 				}
 			};
@@ -126,7 +125,6 @@ public class PMDeregPreparator implements VirtualMachine.StateChange {
 				vm.destroy(true);
 			} else if (!oldState.equals(VirtualMachine.State.DESTROYED)
 					&& newState.equals(VirtualMachine.State.DESTROYED)) {
-				addnewAllocation();
 				vm.unsubscribeStateChange(this);
 				for (VirtualMachine currvm : vms) {
 					if (!currvm.getState().equals(VirtualMachine.State.DESTROYED)) {
@@ -146,5 +144,6 @@ public class PMDeregPreparator implements VirtualMachine.StateChange {
 		for (PhysicalMachine.ResourceAllocation ra : ras) {
 			ra.cancel();
 		}
+		ras.clear();
 	}
 }

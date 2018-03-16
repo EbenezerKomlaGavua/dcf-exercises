@@ -104,7 +104,9 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 												try {
 													// The PM has became
 													// obsolete
-													service.deregisterHost(pm);
+													if (service.isRegisteredHost(pm)) {
+														service.deregisterHost(pm);
+													}
 												} catch (IaaSHandlingException e) {
 													throw new RuntimeException(e);
 												}
@@ -160,7 +162,6 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 			ExercisesBase.reset();
 			long startTime = System.currentTimeMillis();
 
-
 			// Prepares two providers with the same VM/PM schedulers
 			IaaSService ourService, theCompetition;
 			ourService = ExercisesBase.getNewIaaSService();
@@ -206,11 +207,13 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 
 			// Does the actual simulation, makes sure no timed related issues
 			// cause trouble
-			while (!FaultInjector.simulationisComplete) {
+			int i = 2000;
+			while (!FaultInjector.simulationisComplete && i > 0) {
 				Timed.simulateUntil(Timed.getFireCount() + 24 * 60 * 60 * 1000);
 			}
 			matchRan = true;
-			System.out.println("Duration of match was: " + (System.currentTimeMillis() - startTime) + "ms");
+			System.out.println("Duration of match was: " + (System.currentTimeMillis() - startTime)
+					+ "ms remaining iterations: " + i);
 		}
 	}
 

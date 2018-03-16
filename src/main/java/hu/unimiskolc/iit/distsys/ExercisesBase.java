@@ -192,9 +192,17 @@ public class ExercisesBase {
 				RandomUtils.nextDouble(realMinMaxPower, maxMaxPower), 30, 40);
 	}
 
+	/**
+	 * If an automatically generated PM is no longer needed, it can be told to
+	 * ExercisesBase via this method.
+	 * 
+	 * @param pm
+	 *            The PM that is not needed anymore.
+	 */
 	public static void dropPM(PhysicalMachine pm) {
 		if (pm instanceof PMForwarder) {
 			pmfs.remove((PMForwarder) pm);
+			latencyMap.remove(pm.localDisk.getName());
 		}
 	}
 
@@ -251,6 +259,10 @@ public class ExercisesBase {
 		return iaas;
 	}
 
+	/**
+	 * Reinitialise ExercisesBase, this is really useful to avoid memory issues with
+	 * the repeated use of the helpers offered by ExercisesBase
+	 */
 	public static void reset() {
 		latencyMap.clear();
 		pmfs.clear();

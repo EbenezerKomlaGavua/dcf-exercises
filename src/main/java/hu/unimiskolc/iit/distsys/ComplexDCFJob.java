@@ -131,7 +131,7 @@ public class ComplexDCFJob extends DCFJob implements ConsumptionEvent {
 	 * too long idle time.
 	 */
 	public void conComplete() {
-		if (Thread.currentThread().getStackTrace()[2].getClassName()
+		if (Thread.currentThread().getStackTrace()[3].getClassName()
 				.equals("hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceSpreader$FreqSyncer")) {
 			// Only allow the operations take place if the conComplete was not
 			// called directly.

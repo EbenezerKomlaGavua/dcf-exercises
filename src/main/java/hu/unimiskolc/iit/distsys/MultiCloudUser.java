@@ -284,7 +284,7 @@ public class MultiCloudUser extends Timed {
 					// to do
 					boolean allComplete = true;
 					for (ProviderRecord pr : records) {
-						allComplete |= pr.myVMSet.size() == 0;
+						allComplete &= pr.myVMSet.size() == 0;
 					}
 					if (allComplete && prepareForCompletion) {
 						callback.alljobsComplete();

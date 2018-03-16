@@ -47,15 +47,16 @@ public class SingleSet implements Scorer {
 	}
 
 	public void runSet() throws Exception {
-		System.out.println("~~~~~~~ Starting set ~~~~~~~");
-		System.out.println(this);
-		if (sumSubScoreOne < 0) {
-			// On the first run we initialize the scores
-			sumSubScoreOne = 0;
-			sumSubScoreTwo = 0;
-		}
-		for (SingleMatch m : matches) {
-			if (!m.isMatchRan()) {
+		if (matches[0] != null) {
+			System.out.println("~~~~~~~ Starting set ~~~~~~~");
+			System.out.println(this);
+			if (sumSubScoreOne < 0) {
+				// On the first run we initialize the scores
+				sumSubScoreOne = 0;
+				sumSubScoreTwo = 0;
+			}
+			for (int i = 0; i < matches.length; i++) {
+				SingleMatch m = matches[i];
 				// Matches ran only once
 				m.runMatch();
 				System.out.println(m);
@@ -68,10 +69,11 @@ public class SingleSet implements Scorer {
 					sumSubScoreOne += m.getPointsForTeamTwo();
 					sumSubScoreTwo += m.getPointsForTeamOne();
 				}
+				matches[i]=null;
 			}
+			System.out.println(this);
+			System.out.println("~~~~~~~ End of set ~~~~~~~");
 		}
-		System.out.println(this);
-		System.out.println("~~~~~~~ End of set ~~~~~~~");
 	}
 
 	@Override

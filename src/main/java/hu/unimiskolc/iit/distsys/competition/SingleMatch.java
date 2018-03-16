@@ -200,6 +200,7 @@ public class SingleMatch implements MultiCloudUser.CompletionCallback, Scorer {
 			int i = 2000;
 			while (!FaultInjector.simulationisComplete && i > 0) {
 				Timed.simulateUntil(Timed.getFireCount() + 24 * 60 * 60 * 1000);
+				i--;
 			}
 			matchRan = true;
 			System.out.println("Duration of match was: " + (System.currentTimeMillis() - startTime)

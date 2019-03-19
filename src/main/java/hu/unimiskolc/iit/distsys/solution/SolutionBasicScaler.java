@@ -33,7 +33,6 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.ConstantConstraints;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ConsumptionEventAdapter;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
-import hu.unimiskolc.iit.distsys.ComplexDCFJob;
 import hu.unimiskolc.iit.distsys.ExercisesBase;
 import hu.unimiskolc.iit.distsys.interfaces.BasicJobScheduler;
 

@@ -21,7 +21,7 @@
  *  (C) Copyright 2015, Gabor Kecskemeti (kecskemeti@iit.uni-miskolc.hu)
  */
 
-package hu.unimiskolc.iit.distsys;
+package hu.unimiskolc.iit.distsys.competition;
 
 import hu.unimiskolc.iit.distsys.interfaces.BasicJobScheduler;
 import hu.unimiskolc.iit.distsys.interfaces.CloudProvider;

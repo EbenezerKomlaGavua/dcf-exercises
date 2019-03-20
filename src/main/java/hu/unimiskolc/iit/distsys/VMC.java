@@ -107,20 +107,25 @@ public class  VMC implements VMCreationApproaches {
 		
 		VirtualMachine vm = null;
 		VirtualAppliance va1 = new VirtualAppliance ("NewVir",38.0,0);
+	     pmach2.localDisk.registerObject(va1);
+		Timed.simulateUntilLastEvent();
+	   pmach1.localDisk.registerObject(va1);
+	   
+		ResourceConstraints rc = new AlterableResourceConstraints(0.25,10.0,1000);
+		vm = pmach1.requestVM(va1, rc, pmach1.localDisk,1)[0];
+				
+		
+	
+		
+		
+		Timed.simulateUntilLastEvent();
+		
+		pmach1.migrateVM(vm, pmach2);
+		
 	
 		Timed.simulateUntilLastEvent();
-	    ResourceConstraints rc = new AlterableResourceConstraints(0.25,10,128000);
 		
-		vm = pmach1.requestVM(va1, rc, pmach1.localDisk,1)[0];
-		
-		pmach1.localDisk.registerObject(va1);
-		Timed.simulateUntilLastEvent();
-		
-		
-		pmach2.localDisk.registerObject(va1);
-		
-		
-		Timed.simulateUntilLastEvent();
+
 		
 		
 			
@@ -129,12 +134,7 @@ public class  VMC implements VMCreationApproaches {
 		 
 		 	
 		
-		Timed.simulateUntilLastEvent();
 		
-		pmach1.migrateVM(vm, pmach2);
-		
-	
-		Timed.simulateUntilLastEvent();
 	
 		
 		

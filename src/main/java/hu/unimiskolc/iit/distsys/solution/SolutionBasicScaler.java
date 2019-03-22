@@ -110,4 +110,11 @@ public class SolutionBasicScaler implements BasicJobScheduler,
 			vm.unsubscribeStateChange(this);
 		}
 	}
+
+	@Override
+	public void stateChanged(VirtualMachine vm, com.sun.glass.ui.EventLoop.State oldState,
+			com.sun.glass.ui.EventLoop.State newState) {
+		// TODO Auto-generated method stub
+		
+	}
 }

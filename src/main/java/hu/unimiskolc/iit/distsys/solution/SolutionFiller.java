@@ -114,4 +114,10 @@ public class SolutionFiller implements FillInAllPMs {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public void filler1(IaaSService iaas, int vmCount) {
+		// TODO Auto-generated method stub
+		
+	}
 }

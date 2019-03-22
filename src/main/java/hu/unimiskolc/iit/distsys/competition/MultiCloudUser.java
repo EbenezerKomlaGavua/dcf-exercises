@@ -105,6 +105,13 @@ public class MultiCloudUser extends Timed {
 		public double getSuccessRatio() {
 			return vmsRequested < 20 ? 1 : ((double) vmsDestroyedbyUser) / vmsRequested;
 		}
+
+		@Override
+		public void stateChanged(VirtualMachine vm, com.sun.glass.ui.EventLoop.State oldState,
+				com.sun.glass.ui.EventLoop.State newState) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 
 	private static boolean isVMAccessible(final VirtualMachine vm) {
@@ -243,6 +250,13 @@ public class MultiCloudUser extends Timed {
 								default:
 									// do nothing
 								}
+							}
+
+							@Override
+							public void stateChanged(VirtualMachine vm, com.sun.glass.ui.EventLoop.State oldState,
+									com.sun.glass.ui.EventLoop.State newState) {
+								// TODO Auto-generated method stub
+								
 							}
 						});
 						// do not queue the VM forever if it is not scheduled in

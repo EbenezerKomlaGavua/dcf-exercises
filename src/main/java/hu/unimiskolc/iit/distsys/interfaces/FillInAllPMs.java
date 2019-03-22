@@ -23,6 +23,7 @@
 package hu.unimiskolc.iit.distsys.interfaces;
 
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
+import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 
 public interface FillInAllPMs {
 	/**
@@ -30,6 +31,9 @@ public interface FillInAllPMs {
 	 * 
 	 * @param iaas
 	 * @param vmCount
+	 * @throws NetworkException 
 	 */
-	void filler(IaaSService iaas, int vmCount);
+	void filler(IaaSService iaas, int vmCount) throws NetworkException;
+
+	void filler1(IaaSService iaas, int vmCount);
 }

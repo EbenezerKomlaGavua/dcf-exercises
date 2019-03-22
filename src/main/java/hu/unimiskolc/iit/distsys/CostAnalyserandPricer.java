@@ -86,6 +86,13 @@ public class CostAnalyserandPricer extends Timed
 		public long getCompleteUsage() {
 			return endofUsage - startofUsage;
 		}
+
+		@Override
+		public void stateChanged(VirtualMachine vm, com.sun.glass.ui.EventLoop.State oldState,
+				com.sun.glass.ui.EventLoop.State newState) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 
 	public static final double PUE = 1.6;

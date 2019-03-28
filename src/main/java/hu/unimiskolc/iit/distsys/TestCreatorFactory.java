@@ -36,15 +36,17 @@ public class TestCreatorFactory {
 		return (VMCreationApproaches) Class.forName(System.getProperty("hu.unimiskolc.iit.distsys.VMC")).newInstance();
 	}
 
+	
 	public static BasicJobScheduler createARoundRobinScheduler()
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return (BasicJobScheduler) Class.forName(System.getProperty("hu.unimiskolc.iit.distsys.RRJSched","hu.unimiskolc.iit.distsys.RoRoJSchd"))
+		System.setProperty("hu.unimiskolc.iit.distsys.HighAvailability","hu.unimiskolc.iit.distsys.HighAvailability");
+		return (BasicJobScheduler) Class.forName(System.getProperty("hu.unimiskolc.iit.distsys.HighAvailability"))
 				.newInstance();
 	}
-
 	public static FillInAllPMs getPMFiller()
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return (FillInAllPMs) Class.forName(System.getProperty("hu.unimiskolc.iit.distsys.PMFiller","hu.unimiskolc.iit.distsys.PhMachFill")).newInstance();
+		System.setProperty("hu.unimiskolc.iit.distsys.PMFiller","hu.unimiskolc.iit.distsys.PhMachFill");
+		return (FillInAllPMs) Class.forName(System.getProperty("hu.unimiskolc.iit.distsys.PMFiller")).newInstance();
 	}
 
 	public static CloudProvider getNewProvider()

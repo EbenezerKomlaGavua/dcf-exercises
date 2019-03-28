@@ -46,7 +46,7 @@ public class RoRoJSchd implements BasicJobScheduler{
 		this.iaas = iaas;
 
 		orderedPMs = new ArrayList<PhysicalMachine>(iaas.machines);
-		Collections.sort(orderedPMs, new PMComparator());
+		//Collections.sort(orderedPMs, new PMComparator());
 
 		double max = 0;
 
@@ -167,7 +167,7 @@ public class RoRoJSchd implements BasicJobScheduler{
 	private VirtualMachine createNewVM(Job job) throws VMManagementException, NetworkException
 	{
 		double required = job.nprocs * ExercisesBase.maxProcessingCap;
-		Collections.sort(orderedPMs, new PMComparator());
+		//Collections.sort(orderedPMs, new PMComparator());
 
 		int availableIndex = 0;
 
@@ -211,10 +211,10 @@ public class RoRoJSchd implements BasicJobScheduler{
 
 		for(VirtualMachine vm : vms)
 		{
-			if(vm.getResourceAllocation().allocated.getRequiredCPUs() * vm.getResourceAllocation().allocated.getRequiredProcessingPower()
-					> rc.getRequiredCPUs() * rc.getRequiredProcessingPower()
-					&& vm.underProcessing.size() == 0
-					&& vm.getState() == State.RUNNING)
+			//if(vm.getResourceAllocation().allocated.getRequiredCPUs() * vm.getResourceAllocation().allocated.getRequiredProcessingPower()
+					//> rc.getRequiredCPUs() * rc.getRequiredProcessingPower()
+					//&& vm.underProcessing.size() == 0
+					//&& vm.getState() == State.RUNNING)
 			{
 				handler = vm;
 				break;

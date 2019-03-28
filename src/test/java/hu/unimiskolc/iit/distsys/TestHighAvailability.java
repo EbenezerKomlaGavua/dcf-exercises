@@ -130,7 +130,8 @@ public class TestHighAvailability {
 			Assert.assertEquals(
 					"Jobs with availability level " + Constants.availabilityLevels[i]
 							+ " did not get their expected qualities",
-					Constants.availabilityLevels[i], (double) successCounters[i] / totalCounters[i],
+					Constants.availabilityLevels[i], 
+					(double) successCounters[i] / totalCounters[i],
 					(1 - Constants.availabilityLevels[i]) * 0.5);
 		}
 	}

@@ -31,6 +31,8 @@ public class TestPricing {
 
 	@Test(timeout = 60000)
 	public void thePricingTest() throws Exception {
+		System.out.println("sadf");
+		System.out.println("-> "+TestCreatorFactory.getNewProvider());
 		SingleMatch match = new SingleMatch(TestCreatorFactory.getNewProvider().getClass(),
 				TestCreatorFactory.getDefaultProvider().getClass());
 		match.runMatch();

@@ -28,7 +28,7 @@ public class RoRoJSchd implements BasicJobScheduler{
 	boolean scaler = true;
 
 	IaaSService iaas;
-	ArrayList<VirtualMachine> vms = new ArrayList<VirtualMachine>();
+	VirtualMachine vms = new VirtualMachine(null);
 	ArrayList<PhysicalMachine> orderedPMs = new ArrayList<PhysicalMachine>();
 
 	int count = 0;
@@ -64,7 +64,7 @@ public class RoRoJSchd implements BasicJobScheduler{
 		scaler = true;
 		
 	}
-
+/*
 	@Override
 	public void handleJobRequestArrival(Job j) {
 		// TODO Auto-generated method stub
@@ -91,7 +91,7 @@ public class RoRoJSchd implements BasicJobScheduler{
 			try 
 			{
 				vm = createNewVM(job);
-				vm.subscribeStateChange(new VMStateChange(job, vms, iaas));
+				//vm.subscribeStateChange(new VMStateChange(job, vms, iaas));
 			} 
 			catch (Exception e) 
 			{
@@ -222,6 +222,14 @@ public class RoRoJSchd implements BasicJobScheduler{
 		}
 
 		return handler;
+	
+	}
+	*/
+
+	@Override
+	public void handleJobRequestArrival(Job j) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 	

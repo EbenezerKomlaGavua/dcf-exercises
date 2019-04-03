@@ -129,8 +129,7 @@ VirtualMachine.StateChange{
 								+ ((ComplexDCFJob) j).getAvailabilityLevel());
 					
 					
-					
-					
+								
 				
 					}
 					});

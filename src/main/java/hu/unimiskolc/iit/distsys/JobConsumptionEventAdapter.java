@@ -1,6 +1,6 @@
 package hu.unimiskolc.iit.distsys;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
@@ -9,13 +9,27 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption
 
 public class JobConsumptionEventAdapter implements ConsumptionEvent {
 
-	public JobConsumptionEventAdapter(VirtualMachine vm, ArrayList<VirtualMachine> vms, IaaSService iaas) {
-		// TODO Auto-generated constructor stub
+	public JobConsumptionEventAdapter(VirtualMachine vm, Collection<VirtualMachine> vms, IaaSService iaas) {
+		 //TODO Auto-generated constructor stub
 	
 	}
 	
 
 	
+
+//	public JobConsumptionEventAdapter(VirtualMachine vm, VirtualMachine vms, IaaSService iaas) {
+		// TODO Auto-generated constructor stub
+	//}
+
+
+
+
+	public JobConsumptionEventAdapter(VirtualMachine vm, VirtualMachine vms, IaaSService iaas) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 
 	@Override
 	public void conComplete() {

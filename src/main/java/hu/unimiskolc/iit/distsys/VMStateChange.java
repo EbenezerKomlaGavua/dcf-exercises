@@ -1,7 +1,5 @@
 package hu.unimiskolc.iit.distsys;
 
-import java.util.Collection;
-
 //import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
@@ -11,15 +9,15 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 
 public class VMStateChange implements StateChange {
 	ComplexDCFJob job;
-	Collection<VirtualMachine> vms;;
+	VirtualMachine vms;;
 	IaaSService iaas;
 	
 	
 	
-	public VMStateChange(ComplexDCFJob job, Collection<VirtualMachine> vms, IaaSService iaas) {
+	public VMStateChange(ComplexDCFJob job,VirtualMachine vms, IaaSService iaas) {
 		// TODO Auto-generated constructor stub
 		this.job = (ComplexDCFJob) job;
-		this.vms = vms;
+		this.vms = vms ;
 		this.iaas = iaas;
 	
 	}

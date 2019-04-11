@@ -40,7 +40,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class TestSimpleScaler {
-	@Test(timeout = 10000)
+	@Test//(timeout = 50000)
 	public void testCase() throws Exception {
 		// Preparing the IaaS
 		final IaaSService myIaaS = ExercisesBase.getComplexInfrastructure(100);
@@ -118,6 +118,7 @@ public class TestSimpleScaler {
 			Assert.assertTrue("All jobs should be complete but " + j
 					+ " did not", j.getRealstopTime() >= 0);
 
+			
 			// More complex tests:
 			// Should not allow too slow execution time
 			Assert.assertTrue(
@@ -130,6 +131,7 @@ public class TestSimpleScaler {
 					"Jobs should not queue more than a VM instantiation time but "
 							+ j + " did so",
 					j.getRealqueueTime() < vmCreationTime * 1.5);
+			
 		}
 
 		boolean didDecrease = false;

@@ -304,12 +304,12 @@ VirtualMachine.StateChange{
 	}
 
 	
-	
+	/*
 	@Override
 	public void stateChanged(VirtualMachine vm, com.sun.glass.ui.EventLoop.State oldState,
 			com.sun.glass.ui.EventLoop.State newState) {
 		// TODO Auto-generated method stub
 		
 	}
-			}
+		*/	}
 		

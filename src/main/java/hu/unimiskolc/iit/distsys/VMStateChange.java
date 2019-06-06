@@ -6,7 +6,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine.State;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine.StateChange;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
-
+/*
 public class VMStateChange implements StateChange {
 	ComplexDCFJob job;
 	VirtualMachine vms;;
@@ -53,3 +53,4 @@ public class VMStateChange implements StateChange {
 	}
 
 }
+*/

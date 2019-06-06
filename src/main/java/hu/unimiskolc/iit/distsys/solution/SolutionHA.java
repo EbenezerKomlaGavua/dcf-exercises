@@ -163,11 +163,5 @@ public class SolutionHA implements BasicJobScheduler, VirtualMachine.StateChange
 			vmsWithPurpose.remove(vm);
 		}
 	}
-
-	@Override
-	public void stateChanged(VirtualMachine vm, com.sun.glass.ui.EventLoop.State oldState,
-			com.sun.glass.ui.EventLoop.State newState) {
-		// TODO Auto-generated method stub
-		
-	}
 }
+

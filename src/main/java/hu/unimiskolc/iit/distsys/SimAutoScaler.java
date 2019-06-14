@@ -57,7 +57,7 @@ public class SimAutoScaler {
 		centralStorage.registerObject(va);
 		Repository r = cloud.repositories.get(0);
 		
-	
+		//VirtualAppliance va = (VirtualAppliance) r.contents().iterator().next();
 		AlterableResourceConstraints totCaps = AlterableResourceConstraints
 				.getNoResources();
 		double maxNodeProcs = 0;

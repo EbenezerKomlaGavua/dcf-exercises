@@ -102,6 +102,7 @@ public class SimAutoScaler {
 		// Joblist is ready
  
 				
+				
 		// Preparing the runtime checks
 				final TIntArrayList vmCounts = new TIntArrayList();
 

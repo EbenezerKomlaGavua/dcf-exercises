@@ -35,7 +35,7 @@ public class SimAutoScaler {
 	private HashMap<PhysicalMachine, Double> preProcessingRecords;
 	//final IaaSService myIaaS;
 	private final JobArrivalHandler jobhandler;
-	private final GenericTraceProducer trace;
+	//private final GenericTraceProducer trace;
 	//private final QueueManager qm;
 	
 	private static List<Job> jobs;
@@ -50,7 +50,8 @@ public class SimAutoScaler {
 		Timed.simulateUntilLastEvent();
 		
 		//final IaaSService myIaaS = ExercisesBase.getComplexInfrastructure(100);
-		Repository centralStorage = ExercisesBase.getNewRepository(pmCount);
+		
+		Repository centralStorage = ExercisesBase.getNewRepository(0);
 		long minSize = centralStorage.getMaxStorageCapacity();
 		
 		VirtualAppliance va = new VirtualAppliance("mainVA", 30, 0, false, minSize / 50);

@@ -49,8 +49,7 @@ public class SimAutoScaler {
 		// Wait until the PM Controllers finish their initial activities
 		Timed.simulateUntilLastEvent();
 		
-		//final IaaSService myIaaS = ExercisesBase.getComplexInfrastructure(100);
-		
+				
 		Repository centralStorage = ExercisesBase.getNewRepository(0);
 		long minSize = centralStorage.getMaxStorageCapacity();
 		
@@ -58,7 +57,7 @@ public class SimAutoScaler {
 		centralStorage.registerObject(va);
 		Repository r = cloud.repositories.get(0);
 		
-		//VirtualAppliance va = (VirtualAppliance) r.contents().iterator().next();
+	
 		AlterableResourceConstraints totCaps = AlterableResourceConstraints
 				.getNoResources();
 		double maxNodeProcs = 0;

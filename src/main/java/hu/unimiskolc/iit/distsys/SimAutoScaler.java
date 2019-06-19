@@ -42,7 +42,7 @@ public class SimAutoScaler {
 	
 	//final int pmCount;
 	
-	public SimAutoScaler(int cores, int nodes,String traceFileLoc)throws Exception
+	public SimAutoScaler(int cores, int nodes,String traceFileLoc, Class<?> class1)throws Exception
 			 {
 		// Prepares the datacentre
 		cloud = DCCreation.createDataCentre(FirstFitScheduler.class, SchedulingDependentMachines.class, nodes, cores);
@@ -87,7 +87,7 @@ public class SimAutoScaler {
 	// Preparing the jobs for the VMs
 		jobhandler = new JobArrivalHandler(FileBasedTraceProducerFactory.getProducerFromFile(traceFileLoc, 0, 1000000,
 				false, nodes * cores, DCFJob.class), null, null, null);
-		jobhandler.processTrace();
+		//jobhandler.processTrace();
 		
 		
 		//GenericRandomTraceGenerator trace = new GenericRandomTraceGenerator(ComplexDCFJob.class);
@@ -95,7 +95,7 @@ public class SimAutoScaler {
 		RepetitiveRandomTraceGenerator trace = new RepetitiveRandomTraceGenerator(
 				ComplexDCFJob.class);
 		
-		final List<Job> jobs = trace.getAllJobs();
+		 final List<Job> jobs = trace.getAllJobs();
 				final long lastTermination = JobListAnalyser
 				.getLastTerminationTime(jobs) * 1000 * 2;
 		// Joblist is ready
@@ -175,7 +175,7 @@ public class SimAutoScaler {
 
 	public static void main(String[] args) throws  Exception {
 		// TODO Auto-generated method stub
-		new SimAutoScaler(Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[0]).simulateAndprintStatistics();
+		new SimAutoScaler(Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[0],  Class.forName(args[3])).simulateAndprintStatistics();
 	}
 
 }

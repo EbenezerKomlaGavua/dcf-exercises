@@ -119,13 +119,7 @@ VirtualMachine.StateChange{
 				vm.subscribeStateChange(this);
 				vmsWithPurpose.put(vm, j);
 				System.out.println(j);
-				//System.out.println("Execution time: " + j.getExectimeSecs());
-				//System.out.println("Execution time: " + j.getExectimeSecs());
-				//System.out.println("Current time: " + Timed.getFireCount() / 5000);
-				//System.out.println("Expected finish time: " + (Timed.getFireCount() / 5000 + j.getExectimeSecs()));
-				//System.out.println("Expected finish time: " + (j.getStartTimeInstance() + j.getExectimeSecs()));
-
-		
+				
 } catch (Exception e) {
 	e.printStackTrace();
 	throw new RuntimeException(e);

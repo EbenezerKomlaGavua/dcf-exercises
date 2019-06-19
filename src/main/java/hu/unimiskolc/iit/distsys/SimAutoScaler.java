@@ -33,14 +33,14 @@ public class SimAutoScaler {
 	private final IaaSService cloud;
 	private IaaSEnergyMeter energymeter;
 	private HashMap<PhysicalMachine, Double> preProcessingRecords;
-	//final IaaSService myIaaS;
+	
 	private final JobArrivalHandler jobhandler;
 	//private final GenericTraceProducer trace;
-	//private final QueueManager qm;
+	
 	
 	private static List<Job> jobs;
 	
-	//final int pmCount;
+	
 	
 	public SimAutoScaler(int cores, int nodes,String traceFileLoc, Class<?> class1)throws Exception
 			 {
@@ -57,7 +57,6 @@ public class SimAutoScaler {
 		centralStorage.registerObject(va);
 		Repository r = cloud.repositories.get(0);
 		
-		//VirtualAppliance va = (VirtualAppliance) r.contents().iterator().next();
 		AlterableResourceConstraints totCaps = AlterableResourceConstraints
 				.getNoResources();
 		double maxNodeProcs = 0;
@@ -85,17 +84,12 @@ public class SimAutoScaler {
 	
 		
 	// Preparing the jobs for the VMs
-		jobhandler = new JobArrivalHandler(FileBasedTraceProducerFactory.getProducerFromFile(traceFileLoc, 0, 1000000,
-				false, nodes * cores, DCFJob.class), null, null, null);
-		//jobhandler.processTrace();
 		
 		
-		//GenericRandomTraceGenerator trace = new GenericRandomTraceGenerator(ComplexDCFJob.class);
+		public void JobArrivalHandler(final GenericTraceProducer trace) throws TraceManagementException {	
+			
 		
-		RepetitiveRandomTraceGenerator trace = new RepetitiveRandomTraceGenerator(
-				ComplexDCFJob.class);
-		
-		 final List<Job> jobs = trace.getAllJobs();
+				 final List<Job> jobs = trace.getAllJobs();
 				final long lastTermination = JobListAnalyser
 				.getLastTerminationTime(jobs) * 1000 * 2;
 		// Joblist is ready
@@ -141,8 +135,7 @@ public class SimAutoScaler {
 		}
 		
 		
-		//}
-
+		
 		
 			 
 		public void simulateAndprintStatistics() {
@@ -171,13 +164,15 @@ public class SimAutoScaler {
 				+ cloud.repositories.get(0).contents().size());
 							
 			}
-//}
+
 
 	public static void main(String[] args) throws  Exception {
 		// TODO Auto-generated method stub
 		new SimAutoScaler(Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[0],  Class.forName(args[3])).simulateAndprintStatistics();
 	}
 
-}
 
-//}
+
+
+
+}

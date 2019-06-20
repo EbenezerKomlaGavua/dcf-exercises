@@ -261,7 +261,7 @@ public class ExercisesBase {
 
 	/**
 	 * Reinitialise ExercisesBase, this is really useful to avoid memory issues with
-	 * the repeated use of the helpers offered by ExercisesBase
+	 * the repeated use of the helpers offered by ExercisesBase 
 	 */
 	public static void reset() {
 		latencyMap.clear();

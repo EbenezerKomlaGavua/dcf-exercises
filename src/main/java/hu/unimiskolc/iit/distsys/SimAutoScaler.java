@@ -1,40 +1,35 @@
 package hu.unimiskolc.iit.distsys;
 
-import java.util.List;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+
 import gnu.trove.list.array.TIntArrayList;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
+import hu.mta.sztaki.lpds.cloud.simulator.energy.specialized.IaaSEnergyMeter;
+import hu.mta.sztaki.lpds.cloud.simulator.examples.util.DCCreation;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.JobListAnalyser;
+import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.GenericTraceProducer;
+import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.TraceManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
-import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
-import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
-import uk.ac.ljmu.fet.cs.cloud.examples.autoscaler.AutoScalingDemo;
-import uk.ac.ljmu.fet.cs.cloud.examples.autoscaler.JobArrivalHandler;
-//import uk.ac.ljmu.fet.cs.cloud.examples.autoscaler.JobLauncher;
-import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.FileBasedTraceProducerFactory;
-import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.GenericTraceProducer;
-import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.TraceManagementException;
-import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.random.GenericRandomTraceGenerator;
-import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.random.RepetitiveRandomTraceGenerator;
-import hu.mta.sztaki.lpds.cloud.simulator.energy.specialized.IaaSEnergyMeter;
-import hu.mta.sztaki.lpds.cloud.simulator.examples.jobhistoryprocessor.DCFJob;
-import hu.mta.sztaki.lpds.cloud.simulator.examples.util.DCCreation;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.pmscheduling.SchedulingDependentMachines;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.vmscheduling.FirstFitScheduler;
+import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
+import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
+import hu.unimiskolc.iit.distsys.interfaces.BasicJobScheduler;
 
 
-public class SimAutoScaler {
+
+public class SimAutoScaler  {
 	
 	private final IaaSService cloud;
 	private IaaSEnergyMeter energymeter;
 	private HashMap<PhysicalMachine, Double> preProcessingRecords;
 	
-	private final JobArrivalHandler jobhandler;
+	//private  handleJobRequestArrival j;
 	//private final GenericTraceProducer trace;
 	
 	
@@ -79,23 +74,24 @@ public class SimAutoScaler {
 		test.destroy(true);
 		Timed.simulateUntilLastEvent();
 		Timed.resetTimed();
+			 }
 		
-		 //Preevaluation completed
+		//Preevaluation completed
 	
 		
 	// Preparing the jobs for the VMs
 		
 		
-		public void JobArrivalHandler(final GenericTraceProducer trace) throws TraceManagementException {	
+		public void handleJobRequestArrival(final GenericTraceProducer trace) throws TraceManagementException {	
 			
 		
-				 final List<Job> jobs = trace.getAllJobs();
+				 jobs = trace.getAllJobs();
+				 System.out.println("Number of loaded jobs: " + jobs.size());
 				final long lastTermination = JobListAnalyser
 				.getLastTerminationTime(jobs) * 1000 * 2;
 		// Joblist is ready
- 
-				
-				
+		
+							
 		// Preparing the runtime checks
 				final TIntArrayList vmCounts = new TIntArrayList();
 
@@ -113,6 +109,7 @@ public class SimAutoScaler {
 					}
 				}
 		
+		
 		new MyTimed();
 		// Runtime checks prepared
 
@@ -126,7 +123,7 @@ public class SimAutoScaler {
 			for (PhysicalMachine pm : cloud.machines) {
 				preProcessingRecords.put(pm, pm.getTotalProcessed());
 		}
-			
+		
 			
 			// Set up our energy meter for the whole cloud
 				energymeter = new IaaSEnergyMeter(cloud);
@@ -135,17 +132,15 @@ public class SimAutoScaler {
 		}
 		
 		
-		
-		
-			 
+}	
+				 
 		public void simulateAndprintStatistics() {
 			long before = System.currentTimeMillis();
 		      long beforeSimu = Timed.getFireCount();
 			// Now we can start the simulation
 			Timed.simulateUntilLastEvent();
 		
-		
-		
+
 		
 		// Let's print out some basic statistics
 				System.out.println("Simulation took: " + (System.currentTimeMillis() - before) + "ms");
@@ -165,14 +160,17 @@ public class SimAutoScaler {
 							
 			}
 
+//}
 
 	public static void main(String[] args) throws  Exception {
 		// TODO Auto-generated method stub
 		new SimAutoScaler(Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[0],  Class.forName(args[3])).simulateAndprintStatistics();
+	
 	}
 
 
 
+	}
 
 
-}
+

@@ -1,5 +1,6 @@
 package hu.unimiskolc.iit.distsys;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.energy.specialized.IaaSEnergyMeter;
 import hu.mta.sztaki.lpds.cloud.simulator.examples.util.DCCreation;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.JobListAnalyser;
+import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.FileBasedTraceProducerFactory;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.GenericTraceProducer;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.TraceManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
@@ -33,7 +35,7 @@ public class SimAutoScaler  {
 	//private final GenericTraceProducer trace;
 	
 	
-	private static List<Job> jobs;
+	//private static List<Job> jobs;
 	
 	
 	
@@ -81,12 +83,11 @@ public class SimAutoScaler  {
 		
 	// Preparing the jobs for the VMs
 		
+	
+		FileBasedTraceProducerFactory  trace =  new  FileBasedTraceProducerFactory();
 		
-		public void handleJobRequestArrival(final GenericTraceProducer trace) throws TraceManagementException {	
-			
-		
-				 jobs = trace.getAllJobs();
-				 System.out.println("Number of loaded jobs: " + jobs.size());
+				final List<Job>  jobs = ((GenericTraceProducer) trace).getAllJobs();
+				// System.out.println("Number of loaded jobs: " + jobs.size());
 				final long lastTermination = JobListAnalyser
 				.getLastTerminationTime(jobs) * 1000 * 2;
 		// Joblist is ready
@@ -108,6 +109,7 @@ public class SimAutoScaler  {
 						}
 					}
 				}
+
 		
 		
 		new MyTimed();
@@ -131,8 +133,8 @@ public class SimAutoScaler  {
 			energymeter.startMeter(3600000, true);
 		}
 		
-		
 }	
+	
 				 
 		public void simulateAndprintStatistics() {
 			long before = System.currentTimeMillis();
@@ -167,7 +169,6 @@ public class SimAutoScaler  {
 		new SimAutoScaler(Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[0],  Class.forName(args[3])).simulateAndprintStatistics();
 	
 	}
-
 
 
 	}

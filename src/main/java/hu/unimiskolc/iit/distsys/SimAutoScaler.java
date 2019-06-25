@@ -7,6 +7,7 @@ import java.util.List;
 import gnu.trove.list.array.TIntArrayList;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.energy.specialized.IaaSEnergyMeter;
+import hu.mta.sztaki.lpds.cloud.simulator.examples.jobhistoryprocessor.DCFJob;
 import hu.mta.sztaki.lpds.cloud.simulator.examples.util.DCCreation;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.JobListAnalyser;
@@ -62,7 +63,7 @@ public class SimAutoScaler  {
 			maxNodeProcs = Math.max(maxNodeProcs, pm.getCapacities()
 					.getRequiredCPUs());
 		}
-						 
+		{			 
 			// }	 	 
 		// IaaS is prepared
 
@@ -77,6 +78,7 @@ public class SimAutoScaler  {
 		Timed.simulateUntilLastEvent();
 		Timed.resetTimed();
 			 }
+
 		
 		//Preevaluation completed
 	
@@ -84,9 +86,10 @@ public class SimAutoScaler  {
 	// Preparing the jobs for the VMs
 		
 	
-		FileBasedTraceProducerFactory  trace =  new  FileBasedTraceProducerFactory();
+		GenericTraceProducer  trace =   (FileBasedTraceProducerFactory.getProducerFromFile(traceFileLoc, 0, 1000000,
+				false, nodes * cores, DCFJob.class));
 		
-				final List<Job>  jobs = ((GenericTraceProducer) trace).getAllJobs();
+				final List<Job>  jobs =  trace.getAllJobs();
 				// System.out.println("Number of loaded jobs: " + jobs.size());
 				final long lastTermination = JobListAnalyser
 				.getLastTerminationTime(jobs) * 1000 * 2;
@@ -109,6 +112,7 @@ public class SimAutoScaler  {
 						}
 					}
 				}
+				{
 
 		
 		
@@ -135,7 +139,8 @@ public class SimAutoScaler  {
 		
 }	
 	
-				 
+
+
 		public void simulateAndprintStatistics() {
 			long before = System.currentTimeMillis();
 		      long beforeSimu = Timed.getFireCount();
@@ -156,7 +161,7 @@ public class SimAutoScaler  {
 				}
 				System.out.println("Average utilisation of PMs: " + 100 * totutil / cloud.machines.size() + " %");
 				System.out.println("Total power consumption: " + energymeter.getTotalConsumption() / 1000 / 3600000 + " kWh");
-				System.out.println("Average queue time: " + jobhandler.getAverageQueueTime() + " s");
+				//System.out.println("Average queue time: " + jobhandler.getAverageQueueTime() + " s");
 				System.out.println("Number of virtual appliances registered at the end of the simulation: "
 				+ cloud.repositories.get(0).contents().size());
 							

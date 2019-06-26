@@ -37,12 +37,12 @@ public class TestCreatorFactory {
 	}
 
 	
-	public static BasicJobScheduler createARoundRobinScheduler()
-			throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		System.setProperty("hu.unimiskolc.iit.distsys.SimScaler","hu.unimiskolc.iit.distsys.SimScaler");
-		return (BasicJobScheduler) Class.forName(System.getProperty("hu.unimiskolc.iit.distsys.SimScaler"))
-				.newInstance();
-	}
+	//public static BasicJobScheduler createARoundRobinScheduler()
+			//throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		//System.setProperty("hu.unimiskolc.iit.distsys.SimScaler","hu.unimiskolc.iit.distsys.SimScaler");
+	//	return (BasicJobScheduler) Class.forName(System.getProperty("hu.unimiskolc.iit.distsys.SimScaler"))
+			//	.newInstance();
+	//}
 	public static FillInAllPMs getPMFiller()
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		System.setProperty("hu.unimiskolc.iit.distsys.PMFiller","hu.unimiskolc.iit.distsys.PhMachFill");

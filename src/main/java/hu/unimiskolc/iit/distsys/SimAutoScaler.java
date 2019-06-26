@@ -40,7 +40,7 @@ public class SimAutoScaler  {
 	
 	
 	
-	public SimAutoScaler(int cores, int nodes,String traceFileLoc, Class<?> class1)throws Exception
+	public SimAutoScaler(int cores, int nodes,String traceFileLoc)throws Exception
 			 {
 		// Prepares the datacentre
 		cloud = DCCreation.createDataCentre(FirstFitScheduler.class, SchedulingDependentMachines.class, nodes, cores);
@@ -90,7 +90,7 @@ public class SimAutoScaler  {
 				false, nodes * cores, DCFJob.class));
 		
 				final List<Job>  jobs =  trace.getAllJobs();
-				// System.out.println("Number of loaded jobs: " + jobs.size());
+				 System.out.println("Number of loaded jobs: " + jobs.size());
 				final long lastTermination = JobListAnalyser
 				.getLastTerminationTime(jobs) * 1000 * 2;
 		// Joblist is ready
@@ -171,7 +171,7 @@ public class SimAutoScaler  {
 
 	public static void main(String[] args) throws  Exception {
 		// TODO Auto-generated method stub
-		new SimAutoScaler(Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[0],  Class.forName(args[3])).simulateAndprintStatistics();
+		new SimAutoScaler(Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[0]).simulateAndprintStatistics();
 	
 	}
 

@@ -7,19 +7,15 @@ import java.util.HashMap;
 //import java.util.Random;
 
 import hu.mta.sztaki.lpds.cloud.simulator.DeferredEvent;
-import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine.State;
-//import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine.StateChange;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.ConstantConstraints;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ConsumptionEventAdapter;
-//import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.ConstantConstraints;
-//import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ConsumptionEventAdapter;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
@@ -41,7 +37,7 @@ VirtualMachine.StateChange{
 		private int count = 0;
 				
 		boolean scaler = true;
-		
+	
 		
 		
 		
@@ -57,9 +53,11 @@ VirtualMachine.StateChange{
 		public void setupIaaS(IaaSService iaas) {
 			// TODO Auto-generated method stub
 			this.iaas = iaas;
+		
 			repo = iaas.repositories.get(0);
 			va = (VirtualAppliance) repo.contents().iterator().next();
-		
+			
+			
 			orderedPMs = new ArrayList<PhysicalMachine>(iaas.machines);
 			Collections.sort(orderedPMs, new PMComparator());
 		

@@ -44,10 +44,10 @@ public class JobtoVMScheduler {
 	public JobtoVMScheduler(Collection<VirtualMachine> vmset, List<Job> jobs)
 			throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
-		//final BasicJobScheduler mySched = TestCreatorFactory
-				//.createARoundRobinScheduler();
-		//mySched.setupVMset(vmset);
-		//genericJobDispatcher(mySched, jobs);
+		final BasicJobScheduler mySched = TestCreatorFactory
+				.createARoundRobinScheduler();
+		mySched.setupVMset(vmset);
+		genericJobDispatcher(mySched, jobs);
 	}
 
 	/**
@@ -63,10 +63,10 @@ public class JobtoVMScheduler {
 	public JobtoVMScheduler(IaaSService cloud, List<Job> jobs)
 			throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
-	//final BasicJobScheduler mySched = TestCreatorFactory
-				//.createARoundRobinScheduler();
-		//mySched.setupIaaS(cloud);
-		//genericJobDispatcher(mySched, jobs);
+	final BasicJobScheduler mySched = TestCreatorFactory
+				.createARoundRobinScheduler();
+		mySched.setupIaaS(cloud);
+		genericJobDispatcher(mySched, jobs);
 	}
 
 	/**

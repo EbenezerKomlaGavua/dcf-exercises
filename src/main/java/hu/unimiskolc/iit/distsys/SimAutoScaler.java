@@ -1,6 +1,5 @@
 package hu.unimiskolc.iit.distsys;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.JobListAnalyser;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.FileBasedTraceProducerFactory;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.GenericTraceProducer;
-import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.TraceManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
@@ -22,7 +20,6 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.pmscheduling.SchedulingDependentM
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.vmscheduling.FirstFitScheduler;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
-import hu.unimiskolc.iit.distsys.interfaces.BasicJobScheduler;
 
 
 
@@ -48,12 +45,12 @@ public class SimAutoScaler  {
 		Timed.simulateUntilLastEvent();
 		
 				
-		Repository centralStorage = ExercisesBase.getNewRepository(0);
+		Repository centralStorage = cloud.repositories.get(0);
 		long minSize = centralStorage.getMaxStorageCapacity();
 		
 		VirtualAppliance va = new VirtualAppliance("mainVA", 30, 0, false, minSize / 50);
 		centralStorage.registerObject(va);
-		Repository r = cloud.repositories.get(0);
+		//Repository r = cloud.repositories.get(0);
 		
 		AlterableResourceConstraints totCaps = AlterableResourceConstraints
 				.getNoResources();
@@ -69,7 +66,7 @@ public class SimAutoScaler  {
 
 		// Doing preevaluation of the infrastructure
 		VirtualMachine test = cloud.requestVM(va, cloud.machines.get(0)
-				.getCapacities(), r, 1)[0];
+				.getCapacities(), centralStorage, 1)[0];
 		long preTime = Timed.getFireCount();
 		Timed.simulateUntilLastEvent();
 		long pastTime = Timed.getFireCount();

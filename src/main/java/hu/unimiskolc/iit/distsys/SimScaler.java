@@ -101,8 +101,7 @@ VirtualMachine.StateChange{
 			
 			//Providing vm for all requests  and ensuring that they are properly allocated
 			try {
-				ConstantConstraints rc = new ConstantConstraints(j.nprocs, ExercisesBase.minProcessingCap,
-					ExercisesBase.minMem / j.nprocs);
+				ConstantConstraints rc = new ConstantConstraints(j.nprocs, j.perProcCPUTime, j.usedMemory);
 
 				for (VirtualMachine vm : vmPool.keySet()) {
 					if (vm.getState().toString() == "DESTROYED"
@@ -113,6 +112,7 @@ VirtualMachine.StateChange{
 					}
 				}
 				// let's create a new job instance for the vm with requisite resources
+				//VirtualMachine vm = iaas.requestVM(va, rc, repo, 1)[0];
 				VirtualMachine vm = iaas.requestVM(va, rc, repo, 1)[0];
 				vm.subscribeStateChange(this);
 				vmsWithPurpose.put(vm, j);
@@ -201,7 +201,16 @@ VirtualMachine.StateChange{
 			
 			
 			AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, job.perProcCPUTime, job.usedMemory);
-				//rc.multiply(2);
+			
+						
+			//AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, ExercisesBase.minProcessingCap,
+				//	ExercisesBase.minMem / job.nprocs);
+
+			
+			
+			
+			
+			rc.multiply(0.2);
 				
 				VirtualMachine vm;
 
@@ -215,8 +224,12 @@ VirtualMachine.StateChange{
 	public VirtualMachine getHandlingVM(Job job){
 		
 			VirtualMachine handler = null;
-			AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, job.perProcCPUTime, job.usedMemory);
-			//rc.multiply(2);
+			//AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, job.perProcCPUTime, job.usedMemory);
+			
+			
+			AlterableResourceConstraints rc = new AlterableResourceConstraints(0.25,10.0,1000);
+			
+			rc.multiply(0.4);
 
 			for(VirtualMachine vm : vms)
 			{

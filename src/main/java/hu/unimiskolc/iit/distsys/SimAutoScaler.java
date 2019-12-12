@@ -37,6 +37,9 @@ public class SimAutoScaler  {
 	
 	
 	
+	
+	
+	
 	public SimAutoScaler(int cores, int nodes,String traceFileLoc)throws Exception
 			 {
 		// Prepares the datacentre
@@ -143,7 +146,7 @@ public class SimAutoScaler  {
 		      long beforeSimu = Timed.getFireCount();
 			// Now we can start the simulation
 			Timed.simulateUntilLastEvent();
-		
+			System.exit(1);
 
 		
 		// Let's print out some basic statistics

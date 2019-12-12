@@ -101,8 +101,13 @@ VirtualMachine.StateChange{
 			
 			//Providing vm for all requests  and ensuring that they are properly allocated
 			try {
-				ConstantConstraints rc = new ConstantConstraints(j.nprocs, j.perProcCPUTime, j.usedMemory);
+				ConstantConstraints rc = new ConstantConstraints(j.nprocs, j.perProcCPUTime, j.usedMemory/j.nprocs);
 
+				//ConstantConstraints rc = new ConstantConstraints(j.nprocs, ExercisesBase.minProcessingCap,
+						//ExercisesBase.minMem / j.nprocs);
+				//ConstantConstraints rc = new ConstantConstraints(j.nprocs, ExercisesBase.minProcessingCap,
+						//ExercisesBase.minMem / j.nprocs);
+				
 				for (VirtualMachine vm : vmPool.keySet()) {
 					if (vm.getState().toString() == "DESTROYED"
 							|| vm.getResourceAllocation().allocated.getRequiredCPUs() >= j.nprocs) {
@@ -112,8 +117,7 @@ VirtualMachine.StateChange{
 					}
 				}
 				// let's create a new job instance for the vm with requisite resources
-				//VirtualMachine vm = iaas.requestVM(va, rc, repo, 1)[0];
-				VirtualMachine vm = iaas.requestVM(va, rc, repo, 1)[0];
+			  VirtualMachine vm = iaas.requestVM(va, rc, repo, 1)[0];
 				vm.subscribeStateChange(this);
 				vmsWithPurpose.put(vm, j);
 				System.out.println(j);
@@ -200,17 +204,17 @@ VirtualMachine.StateChange{
 			
 			
 			
-			AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, job.perProcCPUTime, job.usedMemory);
+			//AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, job.perProcCPUTime, job.usedMemory);
 			
 						
-			//AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, ExercisesBase.minProcessingCap,
-				//	ExercisesBase.minMem / job.nprocs);
+			AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, ExercisesBase.minProcessingCap,
+				ExercisesBase.minMem / job.nprocs);
 
 			
 			
 			
 			
-			rc.multiply(0.2);
+			rc.multiply(0.4);
 				
 				VirtualMachine vm;
 
@@ -226,8 +230,10 @@ VirtualMachine.StateChange{
 			VirtualMachine handler = null;
 			//AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, job.perProcCPUTime, job.usedMemory);
 			
-			
-			AlterableResourceConstraints rc = new AlterableResourceConstraints(0.25,10.0,1000);
+			AlterableResourceConstraints rc = new AlterableResourceConstraints(job.nprocs, ExercisesBase.minProcessingCap,
+					ExercisesBase.minMem / job.nprocs);
+
+			//AlterableResourceConstraints rc = new AlterableResourceConstraints(0.25,10.0,1000);
 			
 			rc.multiply(0.4);
 
